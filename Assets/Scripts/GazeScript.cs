@@ -9,7 +9,11 @@ public class GazeScript : MonoBehaviour {
     public float hoverSpeed = 0.5f;
     public GameObject cub1;
     public GameObject cub2;
+    public GameObject door1;
+    public GameObject door2;
+    public GameObject door3;
     public AudioClip jingle;
+    private bool trigger = false;
     private AudioSource audioSource { get { return GetComponent<AudioSource>(); } }
     void Start()
     {
@@ -30,6 +34,25 @@ public class GazeScript : MonoBehaviour {
                     //  Debug.Log("found");
                     cub1.SetActive(true);
                 cub2.SetActive(true);
+                }
+                /*    if(selectedObj!= null && selectedObj != seen.transform.gameObject)
+                    {
+                                GameObject hitObject = seen.transform.gameObject;
+                              MoveMenuButton(hitObject);
+
+                    }
+                    selectedObj = seen.transform.gameObject;*/
+            }
+            if (seen.collider.tag == "Button2")
+            {
+                if ( trigger == false )
+                {
+                    trigger = true;
+                    audioSource.PlayOneShot(jingle, 0.7F);
+                    //  Debug.Log("found");
+                    door1.GetComponent<Animator>().SetTrigger("open");
+                    door2.GetComponent<Animator>().SetTrigger("open");
+                    door3.GetComponent<Animator>().SetTrigger("open");
                 }
                 /*    if(selectedObj!= null && selectedObj != seen.transform.gameObject)
                     {
